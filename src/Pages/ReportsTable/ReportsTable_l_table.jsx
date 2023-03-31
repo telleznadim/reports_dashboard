@@ -8,8 +8,12 @@ function ReportsTable() {
     reportName: "",
     company: "",
     uploadDate: "",
+    subscriberList: "",
     subscriberEmailFreq: "",
     reportRefreshFreq: "",
+    dataRefreshFreq: "",
+    comments: "",
+    newReportName: "",
   });
   const [sortColumn, setSortColumn] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
@@ -21,8 +25,15 @@ function ReportsTable() {
       company: "TRS/FLR",
       uploadDate: "2023-03-22",
       url: "https://app.powerbi.com/reportEmbed?reportId=25bf2069-fc95-478c-8a4b-9577fa9ba9ee&autoAuth=true&ctid=e5082643-6166-4ecc-b73f-5fb7c697d999",
+      subscriberList: [
+        "gmesa@evi-ind.com",
+        "jpena@evi-ind.com",
+        "fl-jmanzanera@evi-ind.com",
+        "gdickson@evi-ind.com",
+      ],
       subscriberEmailFreq: "Daily at 6:00 AM EST",
       reportRefreshFreq: "Daily at 1:00 AM EST",
+      dataRefreshFreq: "Daily at 8:00 PM EST",
     },
     {
       id: 2,
@@ -30,8 +41,15 @@ function ReportsTable() {
       company: "TRS/FLR",
       uploadDate: "2023-03-22",
       url: "https://app.powerbi.com/reportEmbed?reportId=7e182aff-9b7f-4f76-89b8-ec48bc415a3c&autoAuth=true&ctid=e5082643-6166-4ecc-b73f-5fb7c697d999",
+      subscriberList: [
+        "gmesa@evi-ind.com",
+        "jpena@evi-ind.com",
+        "fl-jmanzanera@evi-ind.com",
+        "gdickson@evi-ind.com",
+      ],
       subscriberEmailFreq: "Daily at 6:00 AM EST",
       reportRefreshFreq: "Daily at 1:00 AM EST",
+      dataRefreshFreq: "Daily at 8:00 PM EST",
     },
     {
       id: 3,
@@ -39,8 +57,15 @@ function ReportsTable() {
       company: "CTL",
       uploadDate: "2023-03-22",
       url: "https://app.powerbi.com/reportEmbed?reportId=05cbbb2a-bd98-47d5-977c-3af9c2f4863d&autoAuth=true&ctid=e5082643-6166-4ecc-b73f-5fb7c697d999",
+      subscriberList: [
+        "gmesa@evi-ind.com",
+        "jpena@evi-ind.com",
+        "fl-jmanzanera@evi-ind.com",
+        "gdickson@evi-ind.com",
+      ],
       subscriberEmailFreq: "Daily at 6:00 AM EST",
       reportRefreshFreq: "Daily at 1:00 AM EST",
+      dataRefreshFreq: "Daily at 8:30 PM EST",
     },
   ];
 
@@ -120,6 +145,13 @@ function ReportsTable() {
               handleSort={handleSort}
             />
             <SortableColumnHeader
+              columnName="Subscriber List"
+              columnNameId="subscriberList"
+              sortColumn={sortColumn}
+              sortDirection={sortDirection}
+              handleSort={handleSort}
+            />
+            <SortableColumnHeader
               columnName="Subscriber Email Frequency"
               columnNameId="subscriberEmailFreq"
               sortColumn={sortColumn}
@@ -129,6 +161,27 @@ function ReportsTable() {
             <SortableColumnHeader
               columnName="Report Refresh Frequency"
               columnNameId="reportRefreshFreq"
+              sortColumn={sortColumn}
+              sortDirection={sortDirection}
+              handleSort={handleSort}
+            />
+            <SortableColumnHeader
+              columnName="Data Refresh  Frequency"
+              columnNameId="dataRefreshFreq"
+              sortColumn={sortColumn}
+              sortDirection={sortDirection}
+              handleSort={handleSort}
+            />
+            <SortableColumnHeader
+              columnName="Comments"
+              columnNameId="comments"
+              sortColumn={sortColumn}
+              sortDirection={sortDirection}
+              handleSort={handleSort}
+            />
+            <SortableColumnHeader
+              columnName="New Report Name"
+              columnNameId="newReportName"
               sortColumn={sortColumn}
               sortDirection={sortDirection}
               handleSort={handleSort}
@@ -166,6 +219,15 @@ function ReportsTable() {
               <input
                 type="text"
                 className="form-control"
+                name="subscriberList"
+                value={searchTerms.subscriberList}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                className="form-control"
                 name="subscriberEmailFreq"
                 value={searchTerms.subscriberEmailFreq}
                 onChange={handleChange}
@@ -177,6 +239,33 @@ function ReportsTable() {
                 className="form-control"
                 name="reportRefreshFreq"
                 value={searchTerms.reportRefreshFreq}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                className="form-control"
+                name="dataRefreshFreq"
+                value={searchTerms.dataRefreshFreq}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                className="form-control"
+                name="comments"
+                value={searchTerms.comments}
+                onChange={handleChange}
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                className="form-control"
+                name="newReportName"
+                value={searchTerms.newReportName}
                 onChange={handleChange}
               />
             </td>
@@ -196,8 +285,14 @@ function ReportsTable() {
               </td>
               <td>{item.company}</td>
               <td>{item.uploadDate}</td>
+              <td>
+                {item.subscriberList ? item.subscriberList.join(", ") : ""}
+              </td>
               <td>{item.subscriberEmailFreq}</td>
               <td>{item.reportRefreshFreq}</td>
+              <td>{item.dataRefreshFreq}</td>
+              <td>{item.comments}</td>
+              <td>{item.newReportName}</td>
             </tr>
           ))}
         </tbody>
